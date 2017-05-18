@@ -1,5 +1,6 @@
 /* global fetch */
 const DOMAIN = 'http://192.168.1.178:3000';
+// const DOMAIN = 'http://192.168.43.16:3000';
 const API_TOKEN = 'VsCX1aVMoaksC-9foiEp3jx1Am9XixizGfev03bj4yU';
 
 function getUsers() {

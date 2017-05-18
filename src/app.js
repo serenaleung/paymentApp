@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 // import { Router, Scene } from 'react-native-router-flux';
 import { ActivityIndicator, AsyncStorage, View, Text } from 'react-native';
-import { getUsers } from './utilities/requests'
-import Serena from './components/serena'
+// import { getUsers } from './utilities/requests';
+import Serena from './components/serena';
 // import { PaymentForm } from './components/PaymentForm'
 // import Authentication from './components/routes/Authentication';
 // import 'isomorphic-fetch';
@@ -30,12 +30,13 @@ class App extends Component {
 
 
   getTokenAndPay() {
-    // debugger
-    var cardDetails = {
-      "card[number]": "4242424242424242",
-      "card[exp_month]": "09",
-      "card[exp_year]": "18",
-      "card[cvc]": "123"
+    console.log('beginning');
+
+    const cardDetails = {
+      'card[number]': '4242424242424242',
+      'card[exp_month]': '09',
+      'card[exp_year]': '18',
+      'card[cvc]': '123'
     };
 
     var formBody = [];
@@ -46,7 +47,7 @@ class App extends Component {
     }
     formBody = formBody.join("&");
 
-
+    console.log('token fetch');
     fetch('https://api.stripe.com/v1/tokens', {
       method: 'POST',
       headers: {
@@ -61,6 +62,7 @@ class App extends Component {
   }
 
   processPayment(token) {
+    console.log('Process Payment');
     fetch(`http://192.168.1.178:3000/charges`, {
         method: 'POST',
         headers: {
@@ -70,6 +72,9 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(response => console.log(response))
+    .catch((error) => {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+    });
   }
 
   componentDidMount() {
@@ -83,10 +88,7 @@ class App extends Component {
     //     this.setState({name: data[0].first_name})
     //   })
     //   .catch(err => console.log(err))
-
     this.getTokenAndPay()
-
-
   }
 
   render() {
