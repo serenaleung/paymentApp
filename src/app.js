@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, View, Text } from 'react-native';
 // import { getUsers } from './utilities/requests';
 import Serena from './components/serena';
+import CreditCard from './components/CreditCard'
 // import { PaymentForm } from './components/PaymentForm'
 // import Authentication from './components/routes/Authentication';
 // import 'isomorphic-fetch';
@@ -88,7 +89,7 @@ class App extends Component {
     //     this.setState({name: data[0].first_name})
     //   })
     //   .catch(err => console.log(err))
-    this.getTokenAndPay()
+    // this.getTokenAndPay()
   }
 
   render() {
@@ -97,6 +98,8 @@ class App extends Component {
         <View>
           <Text>{this.state.name}</Text>
           <Serena />
+          <CreditCard />
+          {/* <CreditCard /> */}
         </View>
     );
   }

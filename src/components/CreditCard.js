@@ -1,44 +1,54 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input  } from './common';
+import { View, Text, StyleSheet } from 'react-native';
 
-class LoginForm extends Component {
-  state = { email: '', password: '' };
+import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 
-  onButtonPress() {
-    const { email, password } = this.state;
-    // firebase.auth().signInWithEmailAndPassword(email, password);
-  }
+const s = StyleSheet.create({
+  container: {
+    backgroundColor: "#F5F5F5",
+    marginTop: 60,
+  },
+  label: {
+    color: "black",
+    fontSize: 12,
+  },
+  input: {
+    fontSize: 16,
+    color: "black",
+  },
+});
+
+
+class CreditCard extends Component {
+  _onChange = formData => {
+    console.log(JSON.stringify(formData, null, " "));
+  };
+
+  _onFocus = field => {
+    console.log(field);
+  };
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            placeholder="user@gmail.com"
-            label="Email"
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
+      <View>
+        <Text>Toot Toot</Text>
+        <View style={s.container}>
+          <CreditCardInput
+            autoFocus
+            requiresCVC
+            labelStyle={s.label}
+            inputStyle={s.input}
+            validColor={"black"}
+            invalidColor={"red"}
+            placeholderColor={"darkgray"}
+            onFocus={this._onFocus}
+            onChange={this._onChange}
           />
-        </CardSection>
-
-        <CardSection>
-         <Input
-           secureTextEntry
-           placeholder="password"
-           label="Password"
-           value={this.state.password}
-           onChangeText={password => this.setState({ password })}
-         />
-       </CardSection>
-
-        <CardSection>
-          <Button>
-            Login
-          </Button>
-        </CardSection>
-      </Card>
+        </View>
+        <Text>Poot Poot</Text>
+      </View>
     );
   }
 }
 
-export default App;
+export default CreditCard;
