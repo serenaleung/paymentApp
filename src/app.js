@@ -23,60 +23,61 @@ import CreditCard from './components/CreditCard'
 //   );
 
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = { name: '' };
+    // this.getTokenAndPay = this.getTokenAndPay.bind(this)
     // this.state = { hasToken: false, isLoaded: false };
   }
 
 
-  getTokenAndPay() {
-    console.log('beginning');
-
-    const cardDetails = {
-      'card[number]': '4242424242424242',
-      'card[exp_month]': '09',
-      'card[exp_year]': '18',
-      'card[cvc]': '123'
-    };
-
-    var formBody = [];
-    for (var property in cardDetails) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(cardDetails[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
-
-    console.log('token fetch');
-    fetch('https://api.stripe.com/v1/tokens', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + 'pk_test_94tpmL4fmjoOyB3lhh1HpezT'
-      },
-      body: formBody
-    })
-    .then(response => response.json())
-    .then(response => this.processPayment(response.id))
-  }
-
-  processPayment(token) {
-    console.log('Process Payment');
-    fetch(`http://192.168.1.178:3000/charges`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com" })
-    })
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch((error) => {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
-    });
-  }
+  // getTokenAndPay() {
+  //   console.log('beginning');
+  //
+  //   const cardDetails = {
+  //     'card[number]': '4242424242424242',
+  //     'card[exp_month]': '09',
+  //     'card[exp_year]': '18',
+  //     'card[cvc]': '123'
+  //   };
+  //
+  //   var formBody = [];
+  //   for (var property in cardDetails) {
+  //     var encodedKey = encodeURIComponent(property);
+  //     var encodedValue = encodeURIComponent(cardDetails[property]);
+  //     formBody.push(encodedKey + "=" + encodedValue);
+  //   }
+  //   formBody = formBody.join("&");
+  //
+  //   console.log('token fetch');
+  //   fetch('https://api.stripe.com/v1/tokens', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Authorization': 'Bearer ' + 'pk_test_94tpmL4fmjoOyB3lhh1HpezT'
+  //     },
+  //     body: formBody
+  //   })
+  //   .then(response => response.json())
+  //   .then(response => this.processPayment(response.id))
+  // }
+  //
+  // processPayment(token) {
+  //   console.log('Process Payment');
+  //   fetch(`http://192.168.1.178:3000/charges`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com" })
+  //   })
+  //   .then(response => response.json())
+  //   .then(response => console.log(response))
+  //   .catch((error) => {
+  //     console.log('There has been a problem with your fetch operation: ' + error.message);
+  //   });
+  // }
 
   componentDidMount() {
     // AsyncStorage.getItem('id_token').then((token) => {
@@ -99,7 +100,6 @@ class App extends Component {
           <Text>{this.state.name}</Text>
           <Serena />
           <CreditCard />
-          {/* <CreditCard /> */}
         </View>
     );
   }
