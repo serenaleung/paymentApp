@@ -1,10 +1,14 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+import { Header, Button, CardSection, Spinner } from './components/common';
+import LoginForm from './components/LoginForm';
 // import { Router, Scene } from 'react-native-router-flux';
-import { ActivityIndicator, AsyncStorage, View, Text } from 'react-native';
+// import { ActivityIndicator, AsyncStorage, View, Text } from 'react-native';
 // import { getUsers } from './utilities/requests';
 import Serena from './components/serena';
-import CreditCard from './components/CreditCard'
+import CreditCard from './components/CreditCard';
 // import { PaymentForm } from './components/PaymentForm'
 // import Authentication from './components/routes/Authentication';
 // import 'isomorphic-fetch';
@@ -25,61 +29,62 @@ import CreditCard from './components/CreditCard'
 class App extends Component {
   constructor(props) {
     super();
-    this.state = { name: '' };
+    this.state = { loggedIn: false, apiToken: null };
     // this.getTokenAndPay = this.getTokenAndPay.bind(this)
     // this.state = { hasToken: false, isLoaded: false };
   }
 
 
-  // getTokenAndPay() {
-  //   console.log('beginning');
-  //
-  //   const cardDetails = {
-  //     'card[number]': '4242424242424242',
-  //     'card[exp_month]': '09',
-  //     'card[exp_year]': '18',
-  //     'card[cvc]': '123'
-  //   };
-  //
-  //   var formBody = [];
-  //   for (var property in cardDetails) {
-  //     var encodedKey = encodeURIComponent(property);
-  //     var encodedValue = encodeURIComponent(cardDetails[property]);
-  //     formBody.push(encodedKey + "=" + encodedValue);
-  //   }
-  //   formBody = formBody.join("&");
-  //
-  //   console.log('token fetch');
-  //   fetch('https://api.stripe.com/v1/tokens', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       'Authorization': 'Bearer ' + 'pk_test_94tpmL4fmjoOyB3lhh1HpezT'
-  //     },
-  //     body: formBody
-  //   })
-  //   .then(response => response.json())
-  //   .then(response => this.processPayment(response.id))
-  // }
-  //
-  // processPayment(token) {
-  //   console.log('Process Payment');
-  //   fetch(`http://192.168.1.178:3000/charges`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com" })
-  //   })
-  //   .then(response => response.json())
-  //   .then(response => console.log(response))
-  //   .catch((error) => {
-  //     console.log('There has been a problem with your fetch operation: ' + error.message);
-  //   });
-  // }
+  logInUser() {
+      fetch('http://192.168.1.178:3000/api/v1/sessions', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 's@e.com',
+          password: '123'
+        })
+      })
+      .then((response) => {
+          return response.json()
+      })
+      .then((response) => {
+          console.log(response)
+          this.setState({
+          loggedIn: true,
+          apiToken: response.apiToken
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
-  componentDidMount() {
+
+  logOut() {
+    this.setState({
+      loggedIn: false,
+      apiToken: null
+    })
+  }
+
+  renderContent() {
+     switch (this.state.loggedIn) {
+       case true:
+         return (
+           <CardSection>
+             <Button onPress={this.logOut.bind(this)}>
+               Log Out
+             </Button>
+           </CardSection>
+         );
+       case false:
+         return <LoginForm logInUser={this.logInUser.bind(this)}/>;
+       default:
+         return <Spinner size="large" />;
+     }
+   }
+
+  // componentDidMount() {
     // AsyncStorage.getItem('id_token').then((token) => {
     //   this.setState({ hasToken: token !== null, isLoaded: true });
     // });
@@ -91,14 +96,16 @@ class App extends Component {
     //   })
     //   .catch(err => console.log(err))
     // this.getTokenAndPay()
-  }
+  // }
 
-  render() {
+render() {
 
       return (
         <View>
-          <Text>{this.state.name}</Text>
-          <Serena />
+          {/* <Text>{this.state.name}</Text> */}
+          <Header headerText="Authentication" />
+            {this.renderContent()}
+          {/* <Serena /> */}
           <CreditCard />
         </View>
     );
