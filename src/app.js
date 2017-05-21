@@ -1,22 +1,15 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-
 import { Header, Button, CardSection, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
-// import { Router, Scene } from 'react-native-router-flux';
-// import { ActivityIndicator, AsyncStorage, View, Text } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
 // import { getUsers } from './utilities/requests';
-import Serena from './components/serena';
 import CreditCard from './components/CreditCard';
-// import { PaymentForm } from './components/PaymentForm'
-// import Authentication from './components/routes/Authentication';
-// import 'isomorphic-fetch';
+import Message from './components/Message';
+
 // import HomePage from './components/routes/Home';
 // import { Header } from './components/common';
-// import LoginForm from './components/LoginForm';
-
-// import AlbumList from './components/AlbumList';
 
 // Create Component
 // const App = () => (
@@ -36,7 +29,8 @@ class App extends Component {
 
 
   logInUser() {
-      fetch('http://192.168.1.178:3000/api/v1/sessions', {
+      // fetch('http://192.168.1.178:3000/api/v1/sessions', {
+      fetch('http://192.168.1.75:3000/api/v1/sessions', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -100,13 +94,23 @@ class App extends Component {
 
 render() {
 
+  // return <Router>
+  //   <Scene key="root">
+  //     <Scene key="login" component={Login} title="Login"/>
+  //     <Scene key="creditcard" component={CreditCard} title="CreditCard"/>
+  //     <Scene key="message" component={Message} title="Message"/>
+  //   </Scene>
+  // </Router>
+
       return (
         <View>
           {/* <Text>{this.state.name}</Text> */}
           <Header headerText="Authentication" />
             {this.renderContent()}
+          <Message />
           {/* <Serena /> */}
           <CreditCard />
+
         </View>
     );
   }

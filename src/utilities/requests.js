@@ -1,7 +1,8 @@
 /* global fetch */
-const DOMAIN = 'http://192.168.1.178:3000';
+// const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
-const API_TOKEN = 'VsCX1aVMoaksC-9foiEp3jx1Am9XixizGfev03bj4yU';
+const DOMAIN = 'http://192.168.1.75:3000';
+const API_TOKEN = 'QdSJ76ObfOKJv8rTHhTmFQZjkhrGIK16I5UtOvCKFkw';
 
 function getUsers() {
   return fetch(`${DOMAIN}/api/v1/users?api_token=${API_TOKEN}`)
@@ -10,28 +11,16 @@ function getUsers() {
     .catch(console.error)
 }
 
-
-//
-// function getQuestions () {
+// function getMessages () {
 //   return fetch(`${DOMAIN}/api/v1/questions?api_token=${API_TOKEN}`)
 //     .then(function (res) { return res.json() });
 // }
 //
-// function getQuestion (id) {
+// function getMessage (id) {
 //   return fetch(`${DOMAIN}/api/v1/questions/${id}?api_token=${API_TOKEN}`)
 //     .then(function (res) { return res.json() });
 // }
-//
-// function postQuestion (questionParams) {
-//   return fetch(
-//     `${DOMAIN}/api/v1/questions?api_token=${API_TOKEN}`,
-//     {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({question: questionParams})
-//     }
-//   );
-// }
 
-// export { getQuestions, getQuestion, postQuestion };
-export { getUsers };
+
+// export { getUsers, getMessages, getMessage, postMessageRequest };
+export { postMessageRequest };

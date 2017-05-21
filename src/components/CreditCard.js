@@ -75,7 +75,8 @@ class CreditCard extends Component {
     console.log('Process Payment');
     console.log(token);
     // debugger
-    fetch(`http://192.168.1.178:3000/charges`, {
+    // fetch(`http://192.168.1.178:3000/charges`, {
+    fetch(`http://192.168.1.75:3000/charges`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -99,7 +100,6 @@ class CreditCard extends Component {
   render() {
     return (
       <View>
-        <Text>Toot Toot</Text>
         <View style={s.container}>
           <CreditCardInput
             autoFocus
@@ -116,7 +116,7 @@ class CreditCard extends Component {
 
         <CardSection>
           <Button onPress={this.getTokenAndPay}>
-            Buy Now
+            Send Payment
           </Button>
         </CardSection>
       </View>
