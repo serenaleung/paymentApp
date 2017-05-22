@@ -3543,6 +3543,10 @@ react-native-router-flux@^3.39.1:
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
 
+react-native-search-box@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-search-box/-/react-native-search-box-0.0.9.tgz#c1677e127d6d2b346850b031b2cb216447fa66f0"
+
 react-native-tabs@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-native-tabs/-/react-native-tabs-1.0.9.tgz#75d3c35e8b5b6970869eab282372cb32e2a782cd"
@@ -4243,10 +4247,6 @@ through@^2.3.6:
 time-stamp@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.1.0.tgz#764a5a11af50561921b133f3b44e618687e0f5c3"
-
-tipsi-stripe@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/tipsi-stripe/-/tipsi-stripe-2.2.1.tgz#0dd9140bbd31687948cd4c59ef2b23603d08e9ad"
 
 tmpl@1.0.x:
   version "1.0.4"

@@ -5,8 +5,9 @@ import { Button, CardSection, Input } from './common';
 
 // const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
-const DOMAIN = 'http://192.168.1.75:3000';
-const API_TOKEN = 'QdSJ76ObfOKJv8rTHhTmFQZjkhrGIK16I5UtOvCKFkw';
+// const DOMAIN = 'http://192.168.1.75:3000';
+const DOMAIN = 'http://192.168.1.166:3000';
+const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
 
 class Message extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Message extends Component {
     this.state = {
       detail: '',
       amount: '',
-    }
+    };
   }
   // onSearchChange(text){
   //   let data = this.props.contactdata
@@ -33,9 +34,9 @@ class Message extends Component {
   //   this.setState({amount: integer})
   // }
 
-  postMessageRequest () {
+  postMessageRequest() {
     return fetch(
-      `${DOMAIN}/users/1/messages?api_token=${API_TOKEN}`,
+      `${DOMAIN}/api/v1/messages?api_token=${API_TOKEN}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,11 +54,11 @@ class Message extends Component {
     })
     .catch((error) => {
       console.log(error);
-    })
+    });
   }
 
   render() {
-    return(
+    return (
       <View>
         <CardSection>
           <Input

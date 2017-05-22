@@ -1,12 +1,14 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { Header, Button, CardSection, Spinner } from './components/common';
-import LoginForm from './components/LoginForm';
 import { Router, Scene } from 'react-native-router-flux';
+import { Header, Button, CardSection, Spinner } from './components/common';
 // import { getUsers } from './utilities/requests';
+import LoginForm from './components/LoginForm';
 import CreditCard from './components/CreditCard';
 import Message from './components/Message';
+// import Home from './components/Home';
+
 
 // import HomePage from './components/routes/Home';
 // import { Header } from './components/common';
@@ -19,6 +21,7 @@ import Message from './components/Message';
 //   </View>
 //   );
 
+
 class App extends Component {
   constructor(props) {
     super();
@@ -30,7 +33,8 @@ class App extends Component {
 
   logInUser() {
       // fetch('http://192.168.1.178:3000/api/v1/sessions', {
-      fetch('http://192.168.1.75:3000/api/v1/sessions', {
+      // fetch('http://192.168.1.75:3000/api/v1/sessions', {
+      fetch('http://192.168.1.166:3000/api/v1/sessions', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -46,11 +50,11 @@ class App extends Component {
           this.setState({
           loggedIn: true,
           apiToken: response.apiToken
-          })
+        });
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
 
 
@@ -58,7 +62,7 @@ class App extends Component {
     this.setState({
       loggedIn: false,
       apiToken: null
-    })
+    });
   }
 
   renderContent() {
@@ -96,7 +100,7 @@ render() {
 
   // return <Router>
   //   <Scene key="root">
-  //     <Scene key="login" component={Login} title="Login"/>
+  //     <Scene key="login" component={LoginForm} title="Login"/>
   //     <Scene key="creditcard" component={CreditCard} title="CreditCard"/>
   //     <Scene key="message" component={Message} title="Message"/>
   //   </Scene>
@@ -105,11 +109,12 @@ render() {
       return (
         <View>
           {/* <Text>{this.state.name}</Text> */}
+          {/* <Home /> */}
           <Header headerText="Authentication" />
             {this.renderContent()}
           <Message />
           {/* <Serena /> */}
-          <CreditCard />
+          {/* <CreditCard /> */}
 
         </View>
     );

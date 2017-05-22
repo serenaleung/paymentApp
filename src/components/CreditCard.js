@@ -76,7 +76,8 @@ class CreditCard extends Component {
     console.log(token);
     // debugger
     // fetch(`http://192.168.1.178:3000/charges`, {
-    fetch(`http://192.168.1.75:3000/charges`, {
+    // fetch(`http://192.168.1.75:3000/charges`, {
+    fetch(`http://192.168.1.166:3000/charges`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
