@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Text, Picker, Button, Form, Input, Item } from 'native-base';
+import { Container, Header, Text, Button, Form, Input, Item } from 'native-base';
 import axios from 'axios';
+// import { Search } from './common/Search';
+// import MultiSelect from 'react-native-multiple-select';
 // import { postMessageRequest } from '../utilities/requests';
 
-// const DOMAIN = 'http://192.168.1.178:3000';
+const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
-const DOMAIN = 'http://192.168.1.75:3000';
-// const DOMAIN = 'http://192.168.1.166:3000';
+// const DOMAIN = 'http://192.168.1.75:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
+
 
 class Message extends Component {
 
@@ -26,7 +28,7 @@ class Message extends Component {
 
   componentWillMount(){
     console.log('GOING INTO MESSAGE.JS');
-    axios.get('http://10.228.246.228:3000/api/v1/users', {
+    axios.get('http://192.168.1.75:3000/api/v1/users', {
       headers: { 'auth': this.state.token }
     })
       .then((response) => {
@@ -88,7 +90,6 @@ class Message extends Component {
     return (
       <Container>
         <Header>
-          
         </Header>
         <Form>
           <Item>
@@ -112,11 +113,7 @@ class Message extends Component {
             />
           </Item>
           <Item>
-            <Picker
-              selectedValue={this.state.user_ids}
-              onValueChange={(user_ids) => this.setState({user_ids: user_ids})}>
-              <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+            {/* <Search /> */}
           </Item>
         </Form>
         <Button onPress={this.postMessageRequest.bind(this)}>

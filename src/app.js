@@ -4,6 +4,7 @@ import axios from 'axios';
 import { View, Text } from 'react-native';
 import { Container, Grid, Content, InputGroup, Input, Icon } from 'native-base';
 import Router from './Router';
+import CreditCard from './components/CreditCard';
 // import { getUsers } from './utilities/requests';
 
 class App extends Component {
@@ -38,6 +39,7 @@ render() {
 
     return (
       <Router />
+      // <CreditCard />
     );
   }
 }

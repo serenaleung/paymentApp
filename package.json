@@ -16,6 +16,7 @@
     "react-native-credit-card-input": "^0.3.3",
     "react-native-easy-grid": "^0.1.9",
     "react-native-linear-gradient": "^2.0.0",
+    "react-native-multiple-select": "^0.2.1",
     "react-native-router-flux": "^3.39.1",
     "react-native-search-box": "^0.0.9",
     "react-native-vector-icons": "^4.1.1",

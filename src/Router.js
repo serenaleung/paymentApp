@@ -9,8 +9,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const mainIcon = ({ selected }) => {
   return(
     <View>
-      <Icon name='md-home' style={{ color: selected ? 'red' : 'white' }} />
-      <Text style={{ color: selected ? 'red' : 'white' }}> Main </Text>
+      <Icon name='md-home' style={{ fontSize: 22, color: selected ? '#2E2E83' : 'grey', marginLeft: 11 }} />
+      <Text style={{ marginBottom: 10, fontSize: 14, color: selected ? '#2E2E83' : 'grey' }}> Main </Text>
+    </View>
+  );
+}
+
+
+const messageIcon = ({ selected }) => {
+  return(
+    <View>
+      <Icon name='md-mail' style={{ fontSize: 23, color: selected ? '#2E2E83' : 'grey', marginLeft: 50 }} />
+      <Text style={{ marginBottom: 10, fontSize: 14, color: selected ? '#2E2E83' : 'grey' }}> Create a Message </Text>
     </View>
   );
 }
@@ -35,8 +45,8 @@ const RouterComponent = () => {
             <Scene key='main' title='Main' component={Main}></Scene>
           </Scene>
 
-          <Scene key='MessageSet' icon={ mainIcon}>
-            <Scene key='messages' title='Messages' component={Message}></Scene>
+          <Scene key='MessageSet' icon={ messageIcon }>
+            <Scene key='messages' hideNavBar={true} component={Message}></Scene>
           </Scene>
 
         </Scene>
