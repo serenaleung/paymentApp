@@ -11,7 +11,7 @@ export default {
   },
   bttn:{
     backgroundColor: '#7B1993',
-    margin: 20,
+    margin: 20
   },
   bttnText: {
     color: '#FFF',
