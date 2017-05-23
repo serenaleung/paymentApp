@@ -4,6 +4,16 @@ import { View, Text } from 'react-native';
 import LoginForm from './components/LoginForm';
 import Main from './components/Main';
 import Message from './components/Message';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+const mainIcon = ({ selected }) => {
+  return(
+    <View>
+      <Icon name='md-home' style={{ color: selected ? 'red' : 'white' }} />
+      <Text style={{ color: selected ? 'red' : 'white' }}> Main </Text>
+    </View>
+  );
+}
 
 const RouterComponent = () => {
   console.log('GOT INSIDE ROUTER')
@@ -18,11 +28,14 @@ const RouterComponent = () => {
           />
       </Scene>
 
-      <Scene key='afterAuth'>
+      <Scene key='AfterAuth'>
         <Scene key='tabbar' tabs >
 
-          <Scene key='mainSet'>
+          <Scene key='MainSet' icon={ mainIcon }>
             <Scene key='main' title='Main' component={Main}></Scene>
+          </Scene>
+
+          <Scene key='MessageSet' icon={ mainIcon}>
             <Scene key='messages' title='Messages' component={Message}></Scene>
           </Scene>
 

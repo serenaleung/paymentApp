@@ -1,7 +1,8 @@
 /* global fetch */
 // const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
-const DOMAIN = 'http://192.168.1.75:3000';
+// const DOMAIN = 'http://192.168.1.75:3000';
+const DOMAIN = 'http://10.228.246.228:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
 
 function getUsers() {

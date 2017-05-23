@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker } from 'react-native';
-import { Button, CardSection, Input } from './common';
+import { StyleSheet } from 'react-native';
+import { Container, Header, Text, Picker, Button, Form, Input, Item } from 'native-base';
+import axios from 'axios';
 // import { postMessageRequest } from '../utilities/requests';
 
 // const DOMAIN = 'http://192.168.1.178:3000';
@@ -8,16 +9,33 @@ import { Button, CardSection, Input } from './common';
 const DOMAIN = 'http://192.168.1.75:3000';
 // const DOMAIN = 'http://192.168.1.166:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
-const Item = Picker.Item;
 
 class Message extends Component {
+
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       detail: '',
       amount: '',
       user_ids: '',
+      userList: null,
+      token: this.props.data
     };
+  }
+
+  componentWillMount(){
+    console.log('GOING INTO MESSAGE.JS');
+    axios.get('http://10.228.246.228:3000/api/v1/users', {
+      headers: { 'auth': this.state.token }
+    })
+      .then((response) => {
+        console.log('GET USERS API RESPONSE')
+        console.log(response);
+      })
+      .catch( (e) => {
+        console.log(e)
+      })
   }
   // onSearchChange(text){
   //   let data = this.props.contactdata
@@ -68,39 +86,43 @@ class Message extends Component {
 
   render() {
     return (
-      <View>
-        <CardSection>
-          <Input
-            placeholder="CodeCore party"
-            label="Title"
-            value={this.state.details}
-            onChangeText={details => this.setState({ details })}
-            // onChangeText = {this.props.updateDetails}
-            // onChangeText={ this.onSearchChange.bind(this)}
-          />
-        </CardSection>
-        <CardSection>
-          <Input
-            placeholder="$"
-            label="Amount"
-            value={this.state.amount}
-            onChangeText={amount => this.setState({ amount })}
-            // onChangeText = {this.props.updateAmount}
-            // onChangeText={ this.onSearchChange.bind(this)}
-          />
-        </CardSection>
-        <Picker
-          selectedValue={this.state.user_ids}
-          onValueChange={(user_ids) => this.setState({user_ids: user_ids})}>
-          {/* <Picker.Item label="Java" value={this.state.name} /> */}
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker>
-        <CardSection>
-          <Button onPress={this.postMessageRequest.bind(this)}>
-            Send Request
-          </Button>
-        </CardSection>
-      </View>
+      <Container>
+        <Header>
+          
+        </Header>
+        <Form>
+          <Item>
+            <Input
+              placeholder="CodeCore party"
+              label="Title"
+              value={this.state.details}
+              onChangeText={details => this.setState({ details })}
+              // onChangeText = {this.props.updateDetails}
+              // onChangeText={ this.onSearchChange.bind(this)}
+            />
+          </Item>
+          <Item>
+            <Input
+              placeholder="$"
+              label="Amount"
+              value={this.state.amount}
+              onChangeText={amount => this.setState({ amount })}
+              // onChangeText = {this.props.updateAmount}
+              // onChangeText={ this.onSearchChange.bind(this)}
+            />
+          </Item>
+          <Item>
+            <Picker
+              selectedValue={this.state.user_ids}
+              onValueChange={(user_ids) => this.setState({user_ids: user_ids})}>
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+          </Item>
+        </Form>
+        <Button onPress={this.postMessageRequest.bind(this)}>
+          <Text>Send Request</Text>
+        </Button>
+      </Container>
       );
   }
 

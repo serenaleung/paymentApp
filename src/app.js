@@ -1,12 +1,10 @@
 // Import a library to help create a component
 import React, { Component } from 'react';
+import axios from 'axios';
 import { View, Text } from 'react-native';
 import { Container, Grid, Content, InputGroup, Input, Icon } from 'native-base';
-// import { getUsers } from './utilities/requests';
-
 import Router from './Router';
-
-
+// import { getUsers } from './utilities/requests';
 
 class App extends Component {
 
@@ -20,10 +18,12 @@ class App extends Component {
   //   this.state = { hasToken: false, isLoaded: false };
   // }
 
-  // componentDidMount() {
+  componentDidMount() {
     // AsyncStorage.getItem('id_token').then((token) => {
     //   this.setState({ hasToken: token !== null, isLoaded: true });
     // });
+    // axios.defaults.baseUrl = 'http://10.228.246.228:3000';
+  }
 
     // getUsers()
     //   .then((data) => {

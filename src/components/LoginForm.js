@@ -20,7 +20,7 @@ class LoginForm extends Component {
   logInUser() {
       // fetch('http://192.168.1.178:3000/api/v1/sessions', {
       // fetch('http://192.168.1.75:3000/api/v1/sessions', {
-      fetch('http://10.228.51.203:3000/api/v1/sessions', {
+      fetch('http://10.228.246.228:3000/api/v1/sessions', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -32,12 +32,13 @@ class LoginForm extends Component {
           return response.json()
       })
       .then((response) => {
-          console.log(response)
+          console.log(response);
           this.setState({
           loggedIn: true,
-          apiToken: response.api_token
+          apiToken: response.success
           });
-          Actions.mainSet(response.api_token)
+          Actions.AfterAuth(response.success)
+          // Actions.MessageSet( response.success );
       })
       .catch((error) => {
         console.log(error);
