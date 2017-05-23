@@ -6,31 +6,33 @@ import Search from 'react-native-search-box';
 const rowHeight = 40;
 
 class Home extends Component {
-
-  state = {
-    data: {
-      'A': [
-        {
-          'name': 'Anh Tuan Nguyen',
-          'age': 28
-        },
-        {
-          'name': 'An Nhien',
-          'age': 20
-        },
-      ],
-      'Z': [
-        {
-          'name': 'Zue Dang',
-          'age': 22
-        },
-        {
-          'name': 'Zoom Jane',
-          'age': 30
-        },
-      ]
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     data: {
+  //       'A': [
+  //         {
+  //           'name': 'Anh Tuan Nguyen',
+  //           'age': 28
+  //         },
+  //         {
+  //           'name': 'An Nhien',
+  //           'age': 20
+  //         },
+  //       ],
+  //       'Z': [
+  //         {
+  //           'name': 'Zue Dang',
+  //           'age': 22
+  //         },
+  //         {
+  //           'name': 'Zoom Jane',
+  //           'age': 30
+  //         },
+  //       ]
+  //     }
+  //   }
+  // }
 
     renderRow = (item, sectionId, index) => {
       return (
@@ -79,13 +81,6 @@ class Home extends Component {
           * There many props that can customizable
           * Please scroll down to Props section
           */
-        />
-
-        <AtoZListView
-          data={this.state.data}
-          renderRow={this.renderRow}
-          rowHeight={rowHeight}
-          sectionHeaderHeight={40}
         />
       </View>
     );

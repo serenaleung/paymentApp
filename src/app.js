@@ -2,11 +2,17 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
+import { Container, Grid, Content, InputGroup, Input, Icon } from 'native-base';
+import LinearGradient from 'react-native-linear-gradient';
 import { Header, Button, CardSection, Spinner } from './components/common';
 // import { getUsers } from './utilities/requests';
 import LoginForm from './components/LoginForm';
+// import LoginFormNB from './components/LoginFormNB';
 import CreditCard from './components/CreditCard';
 import Message from './components/Message';
+import HeaderNB from './components/common/HeaderNB';
+import Background from './components/Background';
+
 // import Home from './components/Home';
 
 
@@ -33,8 +39,8 @@ class App extends Component {
 
   logInUser() {
       // fetch('http://192.168.1.178:3000/api/v1/sessions', {
-      // fetch('http://192.168.1.75:3000/api/v1/sessions', {
-      fetch('http://192.168.1.166:3000/api/v1/sessions', {
+      fetch('http://192.168.1.75:3000/api/v1/sessions', {
+      // fetch('http://192.168.1.166:3000/api/v1/sessions', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,11 +75,20 @@ class App extends Component {
      switch (this.state.loggedIn) {
        case true:
          return (
-           <CardSection>
-             <Button onPress={this.logOut.bind(this)}>
-               Log Out
-             </Button>
-           </CardSection>
+
+          <CardSection>
+            <Button onPress={this.logOut.bind(this)}>
+              Log Out
+            </Button>
+          </CardSection>
+
+          //  <Container>
+          //    <Content>
+          //      <Button onPress={this.logOut.bind(this)}>
+          //        Log Out
+          //      </Button>
+          //   </Content>
+          //  </Container>
          );
        case false:
          return <LoginForm logInUser={this.logInUser.bind(this)}/>;
@@ -108,11 +123,14 @@ render() {
 
       return (
         <View>
+          {/* <HeaderNB /> */}
+          {/* <Background /> */}
+          {/* <LoginFormNB /> */}
+          {this.renderContent()}
+          {/* <Message /> */}
           {/* <Text>{this.state.name}</Text> */}
+          {/* <HeaderNB headerText="Authentication" /> */}
           {/* <Home /> */}
-          <Header headerText="Authentication" />
-            {this.renderContent()}
-          <Message />
           {/* <Serena /> */}
           {/* <CreditCard /> */}
 

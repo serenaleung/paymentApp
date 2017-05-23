@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Picker } from 'react-native';
 import { Button, CardSection, Input } from './common';
 // import { postMessageRequest } from '../utilities/requests';
 
 // const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
-// const DOMAIN = 'http://192.168.1.75:3000';
-const DOMAIN = 'http://192.168.1.166:3000';
+const DOMAIN = 'http://192.168.1.75:3000';
+// const DOMAIN = 'http://192.168.1.166:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
+const Item = Picker.Item;
 
 class Message extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Message extends Component {
     this.state = {
       detail: '',
       amount: '',
+      user_ids: '',
     };
   }
   // onSearchChange(text){
@@ -57,6 +59,13 @@ class Message extends Component {
     });
   }
 
+  getUsers() {
+    return fetch(`${DOMAIN}/api/v1/users?api_token=${API_TOKEN}`)
+      .then(res => (console.info(res), res))
+      .then(function (res) { return res.json() })
+      .catch(console.error)
+  }
+
   render() {
     return (
       <View>
@@ -80,6 +89,12 @@ class Message extends Component {
             // onChangeText={ this.onSearchChange.bind(this)}
           />
         </CardSection>
+        <Picker
+          selectedValue={this.state.user_ids}
+          onValueChange={(user_ids) => this.setState({user_ids: user_ids})}>
+          {/* <Picker.Item label="Java" value={this.state.name} /> */}
+          <Picker.Item label="JavaScript" value="js" />
+        </Picker>
         <CardSection>
           <Button onPress={this.postMessageRequest.bind(this)}>
             Send Request

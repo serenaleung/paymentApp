@@ -1,8 +1,9 @@
 
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-
-import { Button, Card, CardSection, Input, Spinner } from './common';
+import { View, Image } from 'react-native';
+import { Container, Content, Header, Form, Left, Input, Footer, FooterTab, Item, Button, Spinner, Text } from 'native-base';
+import { Card, CardSection } from './common';
+import styles from '../assets/StyleGuide.js'
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false };
@@ -38,51 +39,52 @@ class LoginForm extends Component {
 
     return (
       <Button onPress={this.onButtonPress.bind(this)}>
-        Log in
+        <Text style={ styles.btnText }>Login</Text>
       </Button>
     );
   }
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            placeholder="user@gmail.com"
-            label="Email"
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
-          />
-        </CardSection>
+      <Container>
+        <View >
+          <Image source={require('../assets/bg-sm.jpg')}>
+          <Image source={require('../assets/logo.png')}/>
+        
+              <CardSection>
+                <Input
+                  placeholder="user@gmail.com"
+                  label="Email"
+                  value={this.state.email}
+                  onChangeText={email => this.setState({ email })}
+                />
+              </CardSection>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            placeholder="password"
-            label="Password"
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
-          />
-        </CardSection>
+              <CardSection>
+                <Input
+                  secureTextEntry
+                  placeholder="password"
+                  label="Password"
+                  value={this.state.password}
+                  onChangeText={password => this.setState({ password })}
+                />
+              </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.state.error}
-        </Text>
+              <Text style={styles.errorTextStyle}>
+                {this.state.error}
+              </Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+              <CardSection>
+                {this.renderButton()}
+              </CardSection>
+
+          </Image>
+        </View>
+      </Container>
     );
   }
 }
 
-const styles = {
-  errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  }
-};
+
 
 export default LoginForm;
