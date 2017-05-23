@@ -16,7 +16,7 @@ export default {
     paddingTop: 50,
     alignItems: 'center',
   },
-  btn:{
+  btn: {
     backgroundColor: '#FFF',
     marginLeft: 65,
     marginRight: 40,
@@ -34,6 +34,10 @@ export default {
     fontSize: 16,
     color: '#FFF',
     placeholder: '#FFF',
+    inputColorPlaceholder: "#FFF",
+  },
+  inputColorPlaceholder: {
+    color: '#FFF',
   },
   item: {
     color: '#FFF',

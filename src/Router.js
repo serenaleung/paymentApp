@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm';
 import Main from './components/Main';
 import Message from './components/Message';
 import Icon from 'react-native-vector-icons/Ionicons';
+import CreditCard from './components/CreditCard';
 
 const mainIcon = ({ selected }) => {
   return(
@@ -42,11 +43,15 @@ const RouterComponent = () => {
         <Scene key='tabbar' tabs >
 
           <Scene key='MainSet' icon={ mainIcon }>
-            <Scene key='main' title='Main' component={Main}></Scene>
+            <Scene key='main' hideNavBar={true} component={Main}></Scene>
           </Scene>
 
           <Scene key='MessageSet' icon={ messageIcon }>
             <Scene key='messages' hideNavBar={true} component={Message}></Scene>
+          </Scene>
+
+          <Scene key='creditSet'>
+            <Scene key='payment' hideNavBar={true} component={CreditCard}></Scene>
           </Scene>
 
         </Scene>

@@ -33,8 +33,8 @@ const selectedItem = (selectedItems) => {
 export default class Search extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
+      <View>
+        <Text>
           MultiSelect Sample
         </Text>
 
@@ -77,5 +77,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-
-export { Search };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
 import { Button, CardSection } from './common';
+// import styles from '../assets/StyleGuide.js';
 
 
 const s = StyleSheet.create({

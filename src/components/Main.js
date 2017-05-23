@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Image} from 'react-native';
-import { Container, Content, Card, CardItem, Thumbnail, Icon, Header, Button, Text } from 'native-base';
+import { Image, Dimensions, View } from 'react-native';
+import { Container, Content, Card, CardItem, Thumbnail, Icon, Header, Button, Text, Left, Right, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import styles from '../assets/StyleGuide';
 
 class Main extends Component {
 
@@ -22,38 +23,64 @@ class Main extends Component {
   }
 
   onButtonPress() {
+   console.log('ON BUTTON PRESS PROPS' + this.props.data);
+   Actions.MessageSet(this.props.data);
+ }
+
+  onPayNowPress() {
     console.log('ON BUTTON PRESS PROPS' + this.props.data);
-    Actions.MessageSet(this.props.data);
+    Actions.creditSet();
+  }
+
+  onRejectPress() {
+
   }
 
   render() {
     return(
       <Container>
-        <Header></Header>
-            <Content padder >
-              <Button block onPress={this.onButtonPress.bind(this)} >
-                <Text>Send a Request</Text>
-              </Button>
+        <Header>
+        </Header>
+        <View style={{ marginLeft: 15, marginRight: 15}}>
 
-              <Card>
-             <CardItem>
+          <Card style={{ flex: 0 }}>
+             <CardItem style={{}}>
+               <Left>
                  <Thumbnail source={require('../assets/Jason.png')} />
-                 {/* <Text>{this.state.name}</Text> */}
-                 <Text note> Jason</Text>
+                 <Body>
+                   {/* <Text>{this.state.name}</Text> */}
+                   <Text>Jason</Text>
+                   <Text note>$117.05</Text>
+                 </Body>
+               </Left>
              </CardItem>
 
              <CardItem>
-                 <Image style={{ resizeMode: 'cover', paddingRight: 5 }} source={require('../assets/receiptThumb.png')} />
+               <Body style={{ alignItems: 'center', justifyContent:'center', width: styles.screenWidth}}>
+                 <Image source={require('../assets/receiptThumb.png')} />
+               </Body>
              </CardItem>
 
              <CardItem>
-                 <Icon name={'ios-musical-notes'} style={{color : '#ED4A6A'}} />
-                 <Text>Pay Now</Text>
-                 <Text style={{ alignItems: 'flex-end' }}>Reject Request</Text>
+               <Left>
+                 <Button transparent style={{ marginLeft: 20 }} onPress={ this.onPayNowPress.bind(this) } >
+                    <Icon active name='md-card' style={{color : '#ED4A6A', padding: 15}} />
+                    <Text>Pay Now</Text>
+                 </Button>
+               </Left>
+               <Right>
+                 <Button transparent style={{ marginRight: 20 }} onPress={ this.onRejectPress.bind(this) }>
+                   <Icon active name='md-close' style={{color : '#ED4A6A',  padding: 15}} />
+                   <Text>Reject</Text>
+                 </Button>
+               </Right>
              </CardItem>
            </Card>
 
-        </Content>
+           <Button block style={{marginTop: 60}} onPress={this.onButtonPress.bind(this)} >
+             <Text>Send a Request</Text>
+           </Button>
+        </View>
       </Container>
     );
   }

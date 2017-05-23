@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Text, Button, Form, Input, Item } from 'native-base';
+import { Container, Header, Text, Button, Form, Input, Item, Card } from 'native-base';
 import axios from 'axios';
-// import { Search } from './common/Search';
+import { Search } from './common/Search';
 // import MultiSelect from 'react-native-multiple-select';
 // import { postMessageRequest } from '../utilities/requests';
 
@@ -91,32 +91,43 @@ class Message extends Component {
       <Container>
         <Header>
         </Header>
-        <Form>
-          <Item>
-            <Input
-              placeholder="CodeCore party"
-              label="Title"
-              value={this.state.details}
-              onChangeText={details => this.setState({ details })}
-              // onChangeText = {this.props.updateDetails}
-              // onChangeText={ this.onSearchChange.bind(this)}
-            />
-          </Item>
-          <Item>
-            <Input
-              placeholder="$"
-              label="Amount"
-              value={this.state.amount}
-              onChangeText={amount => this.setState({ amount })}
-              // onChangeText = {this.props.updateAmount}
-              // onChangeText={ this.onSearchChange.bind(this)}
-            />
-          </Item>
-          <Item>
-            {/* <Search /> */}
-          </Item>
-        </Form>
-        <Button onPress={this.postMessageRequest.bind(this)}>
+          {/* <Search /> */}
+
+
+            <Form>
+              <Item>
+                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
+                  placeholder="Description"
+                  label="Title"
+                  value={this.state.details}
+                  onChangeText={details => this.setState({ details })}
+                  // onChangeText = {this.props.updateDetails}
+                  // onChangeText={ this.onSearchChange.bind(this)}
+                />
+              </Item>
+              <Item>
+                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
+                  placeholder="$"
+                  label="Amount"
+                  value={this.state.amount}
+                  onChangeText={amount => this.setState({ amount })}
+                  // onChangeText = {this.props.updateAmount}
+                  // onChangeText={ this.onSearchChange.bind(this)}
+                />
+              </Item>
+              <Item>
+                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
+                  placeholder="Name"
+                  label="Send To"
+                
+
+                  // onChangeText = {this.props.updateAmount}
+                  // onChangeText={ this.onSearchChange.bind(this)}
+                />
+              </Item>
+            </Form>
+
+        <Button style={{marginLeft: 20, marginTop: 70}} onPress={this.postMessageRequest.bind(this)}>
           <Text>Send Request</Text>
         </Button>
       </Container>
