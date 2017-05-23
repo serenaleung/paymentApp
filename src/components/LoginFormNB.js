@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
-import { Item } from 'react-native';
-import { Container, Content, InputGroup, Input, Icon } from 'native-base';
+import { Container, Content, Form, Item, Input } from 'native-base';
+import { Actions } from 'react-native-router-flux'
 
-export default class LoginFormNB extends Component {
-    render() {
-        return (
-            <Container>
-                <Content>
+class LoginFormNB extends Component {
 
-                    <Item>
-                        <Icon active name='home' />
-                        <Input placeholder='Icon Textbox'/>
-                    </Item>
+  componentWillMount(){
+    console.log('LOGINFORMNB LOADING');
+  }
 
-                    <Item>
-                        <Input placeholder='Icon Alignment in Textbox'/>
-                        <Icon active name='swap' />
-                    </Item>
-                </Content>
-            </Container>
-        );
+  onLoginButtonPress({email, password}){
+    askldfjaskldfjsaf
+
+    askjdfhasldkfjas
+
+    .then(
+      sadfjask;ldfjas
+      Actions.afterauth();
+    )
+  }
+
+  render() {
+    return (
+      <Container>
+          <Form style={{ marginTop: 50}}>
+            <Item last>
+              <Input placeholder="Username" />
+            </Item>
+            <Item last>
+              <Input placeholder="Password" />
+            </Item>
+          </Form>
+      </Container>
+      );
     }
 }
+
+export default LoginFormNB;
