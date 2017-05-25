@@ -10,14 +10,20 @@ class Main extends Component {
     super(props);
     console.log(props);
     state = {
-      token: null
+      token: null,
+      name: '',
+      amountOwing: '',
     };
   }
 
+  componentWillMount() {
+    console.log('GOING INTO MAINJS');
+  }
+
   componentDidMount() {
-    this.setState = {
+    this.setState({
       token: this.props.data
-    };
+    });
     console.log('GOING INTO MAIN');
     console.log(this.props.data);
   }
@@ -29,7 +35,7 @@ class Main extends Component {
 
   onPayNowPress() {
     console.log('ON BUTTON PRESS PROPS' + this.props.data);
-    Actions.creditSet();
+    Actions.creditSet(this.props.data);
   }
 
   onRejectPress() {
@@ -39,15 +45,14 @@ class Main extends Component {
   render() {
     return(
       <Container>
-        <Header>
-        </Header>
+        <Header></Header>
         <View style={{ marginLeft: 15, marginRight: 15}}>
 
-          <Card style={{ flex: 0 }}>
-             <CardItem style={{}}>
+          <Card style={ styles.cardSection }>
+             <CardItem>
                <Left>
-                 <Thumbnail source={require('../assets/Jason.png')} />
-                 <Body>
+                 <Thumbnail style={{ marginBottom: -10 }} source={require('../assets/Jason.png')} />
+                 <Body style={{ paddingTop: 10 }}>
                    {/* <Text>{this.state.name}</Text> */}
                    <Text>Jason</Text>
                    <Text note>$117.05</Text>
@@ -56,21 +61,21 @@ class Main extends Component {
              </CardItem>
 
              <CardItem>
-               <Body style={{ alignItems: 'center', justifyContent:'center', width: styles.screenWidth}}>
-                 <Image source={require('../assets/receiptThumb.png')} />
+               <Body style={styles.cardItemImg}>
+                 <Image style={{ marginBottom: -85 }} source={require('../assets/receiptThumb.png')} />
                </Body>
              </CardItem>
 
              <CardItem>
                <Left>
                  <Button transparent style={{ marginLeft: 20 }} onPress={ this.onPayNowPress.bind(this) } >
-                    <Icon active name='md-card' style={{color : '#ED4A6A', padding: 15}} />
+                    <Icon active name='md-card' style={styles.mainIcon} />
                     <Text>Pay Now</Text>
                  </Button>
                </Left>
                <Right>
                  <Button transparent style={{ marginRight: 20 }} onPress={ this.onRejectPress.bind(this) }>
-                   <Icon active name='md-close' style={{color : '#ED4A6A',  padding: 15}} />
+                   <Icon active name='md-close' style={styles.mainIcon} />
                    <Text>Reject</Text>
                  </Button>
                </Right>

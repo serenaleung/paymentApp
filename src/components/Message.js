@@ -1,60 +1,72 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Text, Button, Form, Input, Item, Card } from 'native-base';
+import { AppRegistry, StyleSheet, FlatList, ListView, ListItem, Picker } from 'react-native';
+import { Container, Header, Text, Button, Form, Input, Item, Card, Icon, View } from 'native-base';
 import axios from 'axios';
-import { Search } from './common/Search';
-// import MultiSelect from 'react-native-multiple-select';
-// import { postMessageRequest } from '../utilities/requests';
+import Search from './common/Search';
+import SGstyles from '../assets/StyleGuide';
+import MultiSelect from 'react-native-multiple-select';
 
 const DOMAIN = 'http://192.168.1.178:3000';
 // const DOMAIN = 'http://192.168.43.16:3000';
 // const DOMAIN = 'http://192.168.1.75:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
 
+const items = [{
+  api_token: "something",
+  name: "Jason",
+  id: 2
+},
+{
+  api_token: "something_else",
+  name: "derek",
+  id: 1
+}];
+
+
 
 class Message extends Component {
-
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log('this is the props', props);
     this.state = {
-      detail: '',
+      details: '',
       amount: '',
       user_ids: '',
-      userList: null,
-      token: this.props.data
+      userList: [
+        {"id":2,"name":"Jason","api_token":"z9dvi_1nevKuCahsMt23Iaps7AwtUC40KqivpjUb4LA"},
+        {"id":3,"name":"Chelsea","api_token":"vBUuueIDH3pOqe8DA9B0YWa1EFkXY2VBsxK8l3PPi4U"}
+      ],
+      token: null,
+      ower: null,
     };
+
+    this.fetchUsers = this.fetchUsers.bind(this);
+    this.renderList = this.renderList.bind(this);
+    this.selectedItem = this.selectedItem.bind(this);
   }
 
-  componentWillMount(){
-    console.log('GOING INTO MESSAGE.JS');
-    axios.get('http://192.168.1.75:3000/api/v1/users', {
-      headers: { 'auth': this.state.token }
+  componentDidMount() {
+    console.log('mount');
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
+    // axios.get('http://192.168.1.75:3000/api/v1/users', {
+    axios.get(`${DOMAIN}/api/v1/users`, {
+      headers: { 'auth': this.props.data }
     })
-      .then((response) => {
-        console.log('GET USERS API RESPONSE')
-        console.log(response);
-      })
-      .catch( (e) => {
-        console.log(e)
-      })
+    .then((response) => {
+      console.log('GET USERS API RESPONSE');
+      console.log(response.data);
+      this.setState({
+        token: this.props.data,
+        userList: response.data
+      });
+    })
+    .catch( (e) => {
+      console.log(e)
+    })
   }
-  // onSearchChange(text){
-  //   let data = this.props.contactdata
-  //   let autocomplete = [];
-  //   contactdata.include(text) {
-  //     autocomplete.push(dataThatMatchesTheText)
-  //   }
-  //
-  // }
-
-  // updateDetails = (text) => {
-  //   this.setState({details: text})
-  // }
-  //
-  // updateAmount = (integer) => {
-  //   this.setState({amount: integer})
-  // }
 
   postMessageRequest() {
     return fetch(
@@ -63,20 +75,35 @@ class Message extends Component {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // title: this.updateDetails,
-          // amount: this.updateAmount
-          details: this.state.details,
-          amount: this.state.amount
-          // message: messageParams
+          message: {
+            details: this.state.details,
+            amount: this.state.amount,
+            user_ids: [2,3]
+          }
         })
       }
     )
     .then((response) => {
-        return response.json()
+      return response.json()
     })
+    .then(response => {
+      console.log('sucessfull post', response)}
+      this.setState({
+        amount: response.amount / 3
+      })
+    )
     .catch((error) => {
       console.log(error);
     });
+  }
+
+  renderList() {
+    console.log('Serenas List');
+    return this.state.userList.map((user)=>{
+      return(
+        <Text>{user.name}</Text>
+      );
+    })
   }
 
   getUsers() {
@@ -86,46 +113,61 @@ class Message extends Component {
       .catch(console.error)
   }
 
+  selectedItem(selectedItems) {
+    // do something with selectedItems
+    console.log('Selected Items: ', selectedItems);
+  };
+
   render() {
+    console.log('RENDER');
+    console.log("userlist", this.state.userList);
+    console.log("items", items)
+    console.log("props", this.props)
     return (
       <Container>
         <Header>
         </Header>
-          {/* <Search /> */}
+          <Form style={ SGstyles.fullWidth, {marginLeft: 20, marginRight: 20 }} >
+            <Item underline >
+              <Input style={{ marginTop: 20 }}
+                placeholder="Description"
+                label="Title"
+                value={this.state.details}
+                onChangeText={details => this.setState({ details })}
+                // onChangeText = {this.props.updateDetails}
+                // onChangeText={ this.onSearchChange.bind(this)}
+              />
+            </Item>
+            <Item underline >
+              <Input style={{ marginTop: 20 }}
+                placeholder="$"
+                label="Amount"
+                value={this.state.amount}
+                onChangeText={amount => this.setState({ amount })}
+                // onChangeText = {this.props.updateAmount}
+                // onChangeText={ this.onSearchChange.bind(this)}
+              />
+            </Item>
+          </Form>
 
-
-            <Form>
-              <Item>
-                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
-                  placeholder="Description"
-                  label="Title"
-                  value={this.state.details}
-                  onChangeText={details => this.setState({ details })}
-                  // onChangeText = {this.props.updateDetails}
-                  // onChangeText={ this.onSearchChange.bind(this)}
-                />
-              </Item>
-              <Item>
-                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
-                  placeholder="$"
-                  label="Amount"
-                  value={this.state.amount}
-                  onChangeText={amount => this.setState({ amount })}
-                  // onChangeText = {this.props.updateAmount}
-                  // onChangeText={ this.onSearchChange.bind(this)}
-                />
-              </Item>
-              <Item>
-                <Input style={{marginLeft: 20, marginTop: 20, marginRight: 20}}
-                  placeholder="Name"
-                  label="Send To"
-                
-
-                  // onChangeText = {this.props.updateAmount}
-                  // onChangeText={ this.onSearchChange.bind(this)}
-                />
-              </Item>
-            </Form>
+         <View>
+           <MultiSelect
+             items={this.state.userList}
+             uniqueKey="id"
+             selectedItemsChange={this.selectedItem}
+             selectedItems={[]}
+             selectText="Pick Items"
+             searchInputPlaceholderText="Search Items..."
+             altFontFamily="ProximaNova-Light"
+             tagRemoveIconColor="#CCC"
+             tagBorderColor="#CCC"
+             tagTextColor="#CCC"
+             selectedItemTextColor="#CCC"
+             selectedItemIconColor="#CCC"
+             itemTextColor="#000"
+             searchInputStyle={{ color: '#CCC' }}
+           />
+         </View>
 
         <Button style={{marginLeft: 20, marginTop: 70}} onPress={this.postMessageRequest.bind(this)}>
           <Text>Send Request</Text>
@@ -135,5 +177,22 @@ class Message extends Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
 
 export default Message;

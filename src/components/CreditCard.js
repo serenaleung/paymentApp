@@ -83,7 +83,7 @@ class CreditCard extends Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com", amount: "500" })
+        body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com", amount: '500' })
     })
     .then(response => {
       console.log(response);

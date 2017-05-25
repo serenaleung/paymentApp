@@ -30,14 +30,16 @@ const selectedItem = (selectedItems) => {
   console.log('Selected Items: ', selectedItems);
 };
 
-export default class Search extends Component {
+class Search extends Component {
+
+  constructor() {
+    super()
+    
+  }
+
   render() {
     return (
       <View>
-        <Text>
-          MultiSelect Sample
-        </Text>
-
         <MultiSelect
           items={items}
           uniqueKey="id"
@@ -77,3 +79,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default Search;

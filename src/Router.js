@@ -6,6 +6,7 @@ import Main from './components/Main';
 import Message from './components/Message';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CreditCard from './components/CreditCard';
+import styles from './assets/StyleGuide';
 
 const mainIcon = ({ selected }) => {
   return(
@@ -43,11 +44,20 @@ const RouterComponent = () => {
         <Scene key='tabbar' tabs >
 
           <Scene key='MainSet' icon={ mainIcon }>
-            <Scene key='main' hideNavBar={true} component={Main}></Scene>
+            <Scene
+              key='main'
+              component={Main}
+              title='Home'
+              navigationBarStyle={ styles.navbar }
+              titleStyle={ styles.title }
+              ></Scene>
           </Scene>
 
           <Scene key='MessageSet' icon={ messageIcon }>
-            <Scene key='messages' hideNavBar={true} component={Message}></Scene>
+            <Scene
+              key='messages'
+              hideNavBar={true}
+              component={Message}></Scene>
           </Scene>
 
           <Scene key='creditSet'>

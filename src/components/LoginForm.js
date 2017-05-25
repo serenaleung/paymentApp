@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import { Container, Content, Header, Form, Left, Input, Footer, FooterTab, Item, Button, Spinner, Text, InputGroup, Icon, Textarea} from 'native-base';
+import MultiSelect from 'react-native-multiple-select';
 import { Card, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
 import styles from '../assets/StyleGuide.js';
@@ -93,6 +94,8 @@ class LoginForm extends Component {
       </Button>
     );
   }
+
+  
 
   render() {
     return (

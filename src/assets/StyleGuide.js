@@ -33,8 +33,6 @@ export default {
     height: 60,
     fontSize: 16,
     color: '#FFF',
-    placeholder: '#FFF',
-    inputColorPlaceholder: "#FFF",
   },
   inputColorPlaceholder: {
     color: '#FFF',
@@ -53,4 +51,21 @@ export default {
   form: {
 
   },
+  navbar:{
+    backgroundColor: '#2E2E83',
+  },
+  fullWidth:{
+    width: screenWidth,
+  },
+  cardSection: {
+    marginTop: 20,
+    flex: 0 ,
+  },
+  mainIcon: {
+    color : '#ED4A6A', padding: 15,
+  },
+  cardItemImg: {
+    alignItems: 'center', justifyContent:'center', width: screenWidth,
+  },
+
 }
