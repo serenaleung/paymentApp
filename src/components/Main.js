@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Dimensions, View } from 'react-native';
+import { Image, Dimensions, View, AsyncStorage } from 'react-native';
 import { Container, Content, Card, CardItem, Thumbnail, Icon, Header, Button, Text, Left, Right, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styles from '../assets/StyleGuide';
@@ -18,6 +18,16 @@ class Main extends Component {
 
   componentWillMount() {
     console.log('GOING INTO MAINJS');
+    // AsyncStorage.set('states', JSON.stringify({
+    //   states: [
+    //     {
+    //       val: 1
+    //     },
+    //     {
+    //       val: 2
+    //     }
+    //   ]
+    // }));
   }
 
   componentDidMount() {

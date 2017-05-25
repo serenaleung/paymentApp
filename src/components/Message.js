@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, FlatList, ListView, ListItem, Picker } from 'react-native';
+import { AppRegistry, StyleSheet, FlatList, ListView, ListItem, Picker, ToastAndroid } from 'react-native';
 import { Container, Header, Text, Button, Form, Input, Item, Card, Icon, View } from 'native-base';
 import axios from 'axios';
 import Search from './common/Search';
@@ -38,6 +38,7 @@ class Message extends Component {
       ],
       token: null,
       ower: null,
+      flash_message: ''
     };
 
     this.fetchUsers = this.fetchUsers.bind(this);
@@ -87,11 +88,14 @@ class Message extends Component {
       return response.json()
     })
     .then(response => {
-      console.log('sucessfull post', response)}
-      this.setState({
-        amount: response.amount / 3
-      })
-    )
+      console.log('sucessfull post', response)
+      debugger
+      if(response.hasOwnProperty('success')) {
+        this.setState({ flash_message: response.flash_message })
+      }
+      ToastAndroid.show(response.flash_message, ToastAndroid.LONG)
+      console.log('HHEHEHEHEEHHE', this.state)
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -127,6 +131,8 @@ class Message extends Component {
       <Container>
         <Header>
         </Header>
+          <Text>{ this.state.flash_message }</Text>
+
           <Form style={ SGstyles.fullWidth, {marginLeft: 20, marginRight: 20 }} >
             <Item underline >
               <Input style={{ marginTop: 20 }}
@@ -150,7 +156,7 @@ class Message extends Component {
             </Item>
           </Form>
 
-         <View>
+         {/* <View>
            <MultiSelect
              items={this.state.userList}
              uniqueKey="id"
@@ -167,7 +173,7 @@ class Message extends Component {
              itemTextColor="#000"
              searchInputStyle={{ color: '#CCC' }}
            />
-         </View>
+         </View> */}
 
         <Button style={{marginLeft: 20, marginTop: 70}} onPress={this.postMessageRequest.bind(this)}>
           <Text>Send Request</Text>

@@ -24,6 +24,11 @@ const s = StyleSheet.create({
 class CreditCard extends Component {
   constructor() {
     super();
+
+    this.state = {
+      disabled: false
+    }
+
     this.getTokenAndPay = this.getTokenAndPay.bind(this)
     this.processPayment = this.processPayment.bind(this)
   }
@@ -38,6 +43,7 @@ class CreditCard extends Component {
 
   getTokenAndPay() {
     console.log('beginning');
+    this.setState({ disabled: true })
 
     const cardDetails = {
       'card[number]': '4242424242424242',
@@ -117,7 +123,7 @@ class CreditCard extends Component {
         </View>
 
         <CardSection>
-          <Button onPress={this.getTokenAndPay}>
+          <Button onPress={this.getTokenAndPay} disabled={this.state.disabled}>
             Send Payment
           </Button>
         </CardSection>
