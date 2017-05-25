@@ -18,16 +18,7 @@ class Main extends Component {
 
   componentWillMount() {
     console.log('GOING INTO MAINJS');
-    // AsyncStorage.set('states', JSON.stringify({
-    //   states: [
-    //     {
-    //       val: 1
-    //     },
-    //     {
-    //       val: 2
-    //     }
-    //   ]
-    // }));
+    this.stuff();
   }
 
   componentDidMount() {

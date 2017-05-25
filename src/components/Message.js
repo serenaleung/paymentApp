@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, FlatList, ListView, ListItem, Picker, ToastAndroid } from 'react-native';
+import { AppRegistry, StyleSheet, FlatList, ListView, ListItem, Picker, ToastAndroid, AsyncStorage } from 'react-native';
 import { Container, Header, Text, Button, Form, Input, Item, Card, Icon, View } from 'native-base';
 import axios from 'axios';
 import Search from './common/Search';
@@ -49,6 +49,16 @@ class Message extends Component {
   componentDidMount() {
     console.log('mount');
     this.fetchUsers();
+
+  }
+
+  async stuffx() {
+    try {
+    console.log(await AsyncStorage.getItem('show'));
+    }
+    catch (d) {
+      console.log('w');
+    }
   }
 
   fetchUsers() {
@@ -67,6 +77,12 @@ class Message extends Component {
     .catch( (e) => {
       console.log(e)
     })
+  }
+
+  async stuff() {
+    const sb = JSON.parse(await AsyncStorage.getItem('states'));
+    console.log(sb);
+    await AsyncStorage.setItem('show', '2');
   }
 
   postMessageRequest() {
@@ -93,8 +109,9 @@ class Message extends Component {
       if(response.hasOwnProperty('success')) {
         this.setState({ flash_message: response.flash_message })
       }
-      ToastAndroid.show(response.flash_message, ToastAndroid.LONG)
+      ToastAndroid.show(response.flash_message, ToastAndroid.LONG);
       console.log('HHEHEHEHEEHHE', this.state)
+      this.stuff();
     })
     .catch((error) => {
       console.log(error);
@@ -123,6 +140,7 @@ class Message extends Component {
   };
 
   render() {
+        this.stuffx();
     console.log('RENDER');
     console.log("userlist", this.state.userList);
     console.log("items", items)
