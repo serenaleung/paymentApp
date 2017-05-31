@@ -1,37 +1,33 @@
-// Import a library to help create a component
 import React, { Component } from 'react';
+import { AppState, AsyncStorage, Platform, Vibration } from 'react-native';
 import axios from 'axios';
-import { View, Text } from 'react-native';
-import { Container, Grid, Content, InputGroup, Input, Icon } from 'native-base';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk'
+import { persistStore, autoRehydrate } from 'redux-persist';
+import reducers from './reducers';
 import Router from './Router';
-import CreditCard from './components/CreditCard';
+
+const store = createStore(
+  reducers, {},
+  compose(
+    applyMiddleware(ReduxThunk),
+    autoRehydrate()
+  )
+);
 
 class App extends Component {
-
-  // componentWillMount(){
-  //   console.log( 'WILL MOUNT APP ')
-  //   console.log( this.props )
-  //   console.log(this);
-  // }
-
-  //   this.getTokenAndPay = this.getTokenAndPay.bind(this)
-  //   this.state = { hasToken: false, isLoaded: false };
-  // }
-
   componentDidMount() {
-  // AsyncStorage.getItem('id_token').then((token) => {
-  //   this.setState({ hasToken: token !== null, isLoaded: true });
-  // });
-  // axios.defaults.baseUrl = 'http://10.228.246.228:3000';
+    axios.defaults.baseUrl = 'http://192.168.43.16:3000'
   }
 
   render() {
     return (
-      <Router />
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }
 
-
-// Render on Device
 export default App;

@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import MultiSelect from 'react-native-multiple-select';
+// import MultiSelect from 'react-native-multiple-select';
 
 const items = [{
   id: '92iijs7yta',
@@ -34,30 +34,12 @@ class Search extends Component {
 
   constructor() {
     super()
-    
+
   }
 
   render() {
     return (
       <View>
-        <MultiSelect
-          items={items}
-          uniqueKey="id"
-          selectedItemsChange={selectedItem}
-          selectedItems={[]}
-          selectText="Pick Items"
-          searchInputPlaceholderText="Search Items..."
-          altFontFamily="ProximaNova-Light"
-          tagRemoveIconColor="#CCC"
-          tagBorderColor="#CCC"
-          tagTextColor="#CCC"
-          selectedItemTextColor="#CCC"
-          selectedItemIconColor="#CCC"
-          itemTextColor="#000"
-          searchInputStyle={{ color: '#CCC' }}
-          submitButtonColor="#CCC"
-          submitButtonText="Submit"
-        />
       </View>
     );
   }

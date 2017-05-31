@@ -9,6 +9,8 @@ export default {
   },
   title: {
     color: '#FFF',
+    size: 14,
+    fontWeight: 'bold',
   },
   logoContainer:{
     flex: 4/5,
@@ -29,6 +31,14 @@ export default {
     fontSize: 14,
     width: 50,
   },
+  text: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 15,
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   input: {
     height: 60,
     fontSize: 16,
@@ -43,6 +53,7 @@ export default {
   iconMsg: {
     color: '#FFF',
     fontSize: 26,
+    paddingBottom: 10
   },
   icon: {
     color: '#FFF',
@@ -52,7 +63,7 @@ export default {
 
   },
   navbar:{
-    backgroundColor: '#2E2E83',
+    backgroundColor: '#3E4EB8',
   },
   fullWidth:{
     width: screenWidth,
@@ -67,5 +78,7 @@ export default {
   cardItemImg: {
     alignItems: 'center', justifyContent:'center', width: screenWidth,
   },
-
+  cardMarginTop: {
+    marginBottom: 35
+  }
 }

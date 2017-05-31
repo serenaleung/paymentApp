@@ -4,38 +4,19 @@ import { Container, Header, Text, Button, Form, Input, Item, Card, Icon, View } 
 import axios from 'axios';
 import Search from './common/Search';
 import SGstyles from '../assets/StyleGuide';
-import MultiSelect from 'react-native-multiple-select';
-
 const DOMAIN = 'http://192.168.1.178:3000';
-// const DOMAIN = 'http://192.168.43.16:3000';
-// const DOMAIN = 'http://192.168.1.75:3000';
 const API_TOKEN = '3H0xoOVzMVHjsh27C7e8PwQSrA_PaAFCgBn-rYKfjHM';
-
-const items = [{
-  api_token: "something",
-  name: "Jason",
-  id: 2
-},
-{
-  api_token: "something_else",
-  name: "derek",
-  id: 1
-}];
-
-
 
 class Message extends Component {
   constructor(props) {
     super(props);
-    console.log('this is the props', props);
+    
     this.state = {
       details: '',
       amount: '',
       user_ids: '',
-      userList: [
-        {"id":2,"name":"Jason","api_token":"z9dvi_1nevKuCahsMt23Iaps7AwtUC40KqivpjUb4LA"},
-        {"id":3,"name":"Chelsea","api_token":"vBUuueIDH3pOqe8DA9B0YWa1EFkXY2VBsxK8l3PPi4U"}
-      ],
+      contact: '',
+      userList: [],
       token: null,
       ower: null,
       flash_message: ''
@@ -47,22 +28,10 @@ class Message extends Component {
   }
 
   componentDidMount() {
-    console.log('mount');
     this.fetchUsers();
-
-  }
-
-  async stuffx() {
-    try {
-    console.log(await AsyncStorage.getItem('show'));
-    }
-    catch (d) {
-      console.log('w');
-    }
   }
 
   fetchUsers() {
-    // axios.get('http://192.168.1.75:3000/api/v1/users', {
     axios.get(`${DOMAIN}/api/v1/users`, {
       headers: { 'auth': this.props.data }
     })
@@ -79,12 +48,6 @@ class Message extends Component {
     })
   }
 
-  async stuff() {
-    const sb = JSON.parse(await AsyncStorage.getItem('states'));
-    console.log(sb);
-    await AsyncStorage.setItem('show', '2');
-  }
-
   postMessageRequest() {
     return fetch(
       `${DOMAIN}/api/v1/messages?api_token=${API_TOKEN}`,
@@ -95,7 +58,7 @@ class Message extends Component {
           message: {
             details: this.state.details,
             amount: this.state.amount,
-            user_ids: [2,3]
+            user_ids: this.state.user_ids
           }
         })
       }
@@ -105,13 +68,11 @@ class Message extends Component {
     })
     .then(response => {
       console.log('sucessfull post', response)
-      debugger
+      // debugger
       if(response.hasOwnProperty('success')) {
         this.setState({ flash_message: response.flash_message })
       }
       ToastAndroid.show(response.flash_message, ToastAndroid.LONG);
-      console.log('HHEHEHEHEEHHE', this.state)
-      this.stuff();
     })
     .catch((error) => {
       console.log(error);
@@ -134,22 +95,12 @@ class Message extends Component {
       .catch(console.error)
   }
 
-  selectedItem(selectedItems) {
-    // do something with selectedItems
-    console.log('Selected Items: ', selectedItems);
-  };
-
   render() {
-        this.stuffx();
-    console.log('RENDER');
-    console.log("userlist", this.state.userList);
-    console.log("items", items)
-    console.log("props", this.props)
     return (
       <Container>
         <Header>
+          <Text style={SGstyles.text}>Create a Message</Text>
         </Header>
-          <Text>{ this.state.flash_message }</Text>
 
           <Form style={ SGstyles.fullWidth, {marginLeft: 20, marginRight: 20 }} >
             <Item underline >
@@ -158,8 +109,6 @@ class Message extends Component {
                 label="Title"
                 value={this.state.details}
                 onChangeText={details => this.setState({ details })}
-                // onChangeText = {this.props.updateDetails}
-                // onChangeText={ this.onSearchChange.bind(this)}
               />
             </Item>
             <Item underline >
@@ -168,38 +117,22 @@ class Message extends Component {
                 label="Amount"
                 value={this.state.amount}
                 onChangeText={amount => this.setState({ amount })}
-                // onChangeText = {this.props.updateAmount}
-                // onChangeText={ this.onSearchChange.bind(this)}
+              />
+            </Item>
+            <Item underline >
+              <Input style={{ marginTop: 20 }}
+                placeholder="John Doe"
+                label="Contacts"
               />
             </Item>
           </Form>
 
-         {/* <View>
-           <MultiSelect
-             items={this.state.userList}
-             uniqueKey="id"
-             selectedItemsChange={this.selectedItem}
-             selectedItems={[]}
-             selectText="Pick Items"
-             searchInputPlaceholderText="Search Items..."
-             altFontFamily="ProximaNova-Light"
-             tagRemoveIconColor="#CCC"
-             tagBorderColor="#CCC"
-             tagTextColor="#CCC"
-             selectedItemTextColor="#CCC"
-             selectedItemIconColor="#CCC"
-             itemTextColor="#000"
-             searchInputStyle={{ color: '#CCC' }}
-           />
-         </View> */}
-
-        <Button style={{marginLeft: 20, marginTop: 70}} onPress={this.postMessageRequest.bind(this)}>
+        <Button style={{marginLeft: 35, marginTop: 70}} onPress={this.postMessageRequest.bind(this)}>
           <Text>Send Request</Text>
         </Button>
       </Container>
       );
   }
-
 }
 
 const styles = StyleSheet.create({

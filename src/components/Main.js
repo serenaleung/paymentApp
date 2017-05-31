@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { Image, Dimensions, View, AsyncStorage } from 'react-native';
-import { Container, Content, Card, CardItem, Thumbnail, Icon, Header, Button, Text, Left, Right, Body } from 'native-base';
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Icon,
+  Header,
+  Button,
+  Text,
+  Left,
+  Right,
+  Body
+} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styles from '../assets/StyleGuide';
 
 class Main extends Component {
-
   constructor(props) {
     super(props);
-    console.log(props);
     state = {
       token: null,
       name: '',
@@ -16,31 +27,18 @@ class Main extends Component {
     };
   }
 
-  componentWillMount() {
-    console.log('GOING INTO MAINJS');
-    this.stuff();
-  }
-
   componentDidMount() {
     this.setState({
       token: this.props.data
     });
-    console.log('GOING INTO MAIN');
-    console.log(this.props.data);
   }
 
   onButtonPress() {
-   console.log('ON BUTTON PRESS PROPS' + this.props.data);
    Actions.MessageSet(this.props.data);
  }
 
   onPayNowPress() {
-    console.log('ON BUTTON PRESS PROPS' + this.props.data);
     Actions.creditSet(this.props.data);
-  }
-
-  onRejectPress() {
-
   }
 
   render() {
@@ -54,9 +52,8 @@ class Main extends Component {
                <Left>
                  <Thumbnail style={{ marginBottom: -10 }} source={require('../assets/Jason.png')} />
                  <Body style={{ paddingTop: 10 }}>
-                   {/* <Text>{this.state.name}</Text> */}
-                   <Text>Jason</Text>
-                   <Text note>$117.05</Text>
+                   <Text>{this.state.name}</Text>
+                   <Text note>{this.state.amountOwing}</Text>
                  </Body>
                </Left>
              </CardItem>
