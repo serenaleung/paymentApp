@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
-import { Button, CardSection } from './common';
-
+import { Container, Header, Text, Button, Form, Input, Item, Card, Icon, View } from 'native-base';
+import styles from '../assets/ReduxGuide.js';
+import SGstyles from '../assets/StyleGuide';
 
 const s = StyleSheet.create({
   container: {
@@ -19,10 +20,14 @@ const s = StyleSheet.create({
   },
 });
 
-
 class CreditCard extends Component {
   constructor() {
     super();
+
+    this.state = {
+      disabled: false
+    }
+
     this.getTokenAndPay = this.getTokenAndPay.bind(this)
     this.processPayment = this.processPayment.bind(this)
   }
@@ -36,7 +41,7 @@ class CreditCard extends Component {
   };
 
   getTokenAndPay() {
-    console.log('beginning');
+    this.setState({ disabled: true })
 
     const cardDetails = {
       'card[number]': '4242424242424242',
@@ -65,27 +70,19 @@ class CreditCard extends Component {
     })
     .then(response => response.json())
     .then(response => {
-      // debugger
       this.processPayment(response.id)
-      // processPayment(response.id)
     });
   }
 
   processPayment(token) {
-    console.log('Process Payment');
-    console.log(token);
-    // debugger
-    // fetch(`http://192.168.1.178:3000/charges`, {
-    // fetch(`http://192.168.1.75:3000/charges`, {
-    fetch(`http://10.228.246.228:3000/charges`, {
+    fetch(`http://192.168.1.178:3000/charges`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com", amount: "500" })
+        body: JSON.stringify({ stripeToken: token, stripeTokenType: "card", stripeEmail: "serena@gmail.com", amount: '500' })
     })
     .then(response => {
-      console.log(response);
       response.json();
     })
     .then(response => console.log(response))
@@ -94,13 +91,12 @@ class CreditCard extends Component {
     });
   }
 
-  testPay() {
-    console.log('Yay')
-  }
-
   render() {
     return (
       <View>
+        <Header style={SGstyles.cardMarginTop}>
+          <Text style={SGstyles.text}>Payment</Text>
+        </Header>
         <View style={s.container}>
           <CreditCardInput
             autoFocus
@@ -115,11 +111,9 @@ class CreditCard extends Component {
           />
         </View>
 
-        <CardSection>
-          <Button onPress={this.getTokenAndPay}>
-            Send Payment
-          </Button>
-        </CardSection>
+        <Button block style={styles.btnCard} onPress={this.getTokenAndPay} disabled={this.state.disabled}>
+          <Text>Send Payment</Text>
+        </Button>
       </View>
     );
   }
